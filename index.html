@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanessa Parish Crooks — Singer · Rapper · Poet</title>
+  <meta name="description" content="Vanessa Parish Crooks is a singer, rapper, and poet based in Lisbon, Portugal. Blending neo-soul, R&B, hip-hop, and morna.">
+
+  <!-- Google Fonts: Cormorant Garamond (display serif) + Inter (body sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    /* Design tokens — drawn from Spotify's extracted palette (#401018 deep burgundy)
+       and the warm-dark neo-soul / Afro-Lusophone aesthetic */
+    :root {
+      --bg-deep:        #080503;   /* near-black with warm undertone */
+      --bg-surface:     #100b07;   /* section alternation */
+      --bg-lifted:      #1a1209;   /* cards, inset elements */
+      --bg-card:        #201508;   /* card border-layer */
+
+      --accent-gold:    #c8952a;   /* primary accent — warm amber gold */
+      --accent-amber:   #e4a830;   /* hover state */
+      --accent-burg:    #6e2820;   /* secondary warm burgundy */
+
+      --text-primary:   #f0e8dc;   /* warm off-white */
+      --text-secondary: #9a8878;   /* muted warm grey */
+      --text-muted:     #564a40;   /* very muted */
+
+      --border:         #221710;   /* subtle warm dark border */
+      --border-light:   #2e1f14;
+
+      --font-display:   'Cormorant Garamond', Georgia, serif;
+      --font-body:      'Inter', system-ui, -apple-system, sans-serif;
+
+      --max-w: 1260px;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; }
+    em { font-style: italic; }
+
+    /* ============================================================
+       STICKY NAV — hidden until hero scrolls out of view
+    ============================================================ */
+    #main-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 1.1rem 8vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transform: translateY(-100%);
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1),
+                  background 0.45s ease;
+    }
+
+    #main-nav.visible {
+      transform: translateY(0);
+      background: rgba(8, 5, 3, 0.93);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: color 0.2s;
+    }
+    .nav-logo:hover { color: var(--accent-gold); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent-gold); }
+
+    .nav-socials { display: flex; gap: 1.1rem; align-items: center; }
+    .nav-socials a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: flex;
+      transition: color 0.2s;
+    }
+    .nav-socials a:hover { color: var(--accent-gold); }
+    .nav-socials svg { width: 15px; height: 15px; fill: currentColor; }
+
+    /* ============================================================
+       HERO — full viewport, dark warm gradient, large typography
+    ============================================================ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 8vw;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Layered warm gradient — evokes candlelight, deep night */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 90% 60% at 65% 25%, rgba(110, 40, 32, 0.22) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 75% at 15% 75%, rgba(200, 149, 42, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 85% 80%, rgba(110, 40, 32, 0.12) 0%, transparent 50%),
+        linear-gradient(170deg, #0e0704 0%, #080503 55%, #0c0805 100%);
+      z-index: 0;
+    }
+
+    /* Subtle film-grain texture using SVG noise filter */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 1.75rem;
+    }
+
+    h1.hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3.8rem, 9.5vw, 9rem);
+      font-weight: 600;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 2.25rem;
+    }
+
+    h1.hero-name .accent-line {
+      color: var(--accent-gold);
+      display: block;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.4vw, 1.55rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      letter-spacing: 0.01em;
+    }
+
+    /* CTA buttons */
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 2.6rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.22s, color 0.22s, border-color 0.22s, transform 0.18s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--accent-gold);
+      color: var(--bg-deep);
+      border-color: var(--accent-gold);
+    }
+    .btn-primary:hover {
+      background: var(--accent-amber);
+      border-color: var(--accent-amber);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border-color: var(--border-light);
+    }
+    .btn-ghost:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+    }
+
+    /* Social icons — bottom-left of hero */
+    .hero-socials {
+      position: absolute;
+      bottom: 3rem;
+      left: 8vw;
+      z-index: 1;
+      display: flex;
+      gap: 1.4rem;
+      align-items: center;
+    }
+
+    .hero-socials a {
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    .hero-socials a:hover { color: var(--accent-gold); }
+    .hero-socials svg { width: 17px; height: 17px; fill: currentColor; }
+
+    /* Vertical scroll indicator — right side */
+    .hero-scroll {
+      position: absolute;
+      bottom: 3rem;
+      right: 8vw;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      writing-mode: vertical-rl;
+    }
+
+    .hero-scroll::before {
+      content: '';
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, transparent, var(--text-muted));
+    }
+
+    /* ============================================================
+       SHARED SECTION STYLES
+    ============================================================ */
+    section {
+      padding: 7rem 8vw;
+    }
+
+    .section-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+    }
+
+    h2.section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      margin-bottom: 3.5rem;
+    }
+
+    /* ============================================================
+       ABOUT
+    ============================================================ */
+    #about {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 5.5rem;
+      align-items: start;
+    }
+
+    /* Photo placeholder — warm gradient block suggesting studio warmth */
+    .about-photo-wrap { position: relative; }
+
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      background:
+        radial-gradient(ellipse 65% 55% at 48% 32%, rgba(200, 149, 42, 0.13) 0%, transparent 58%),
+        radial-gradient(ellipse 45% 70% at 25% 78%, rgba(110, 40, 32, 0.16) 0%, transparent 52%),
+        linear-gradient(150deg, #28190e 0%, #170e08 45%, #201408 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Watermark monogram */
+    .about-photo::after {
+      content: 'VPC';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 5.5rem;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      color: rgba(200, 149, 42, 0.1);
+    }
+
+    .about-photo-caption {
+      margin-top: 0.9rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .about-pull-quote {
+      margin-top: 2.25rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent-gold);
+      line-height: 1.45;
+    }
+
+    /* Bio text */
+    .about-text p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.85;
+      margin-bottom: 1.6rem;
+    }
+
+    /* Drop cap on first paragraph */
+    .about-text p:first-of-type::first-letter {
+      font-family: var(--font-display);
+      font-size: 3.8rem;
+      font-weight: 700;
+      line-height: 0.75;
+      float: left;
+      margin: 0.08em 0.08em 0 0;
+      color: var(--accent-gold);
+    }
+
+    /* Highlights strip */
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 4.5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .highlight-item .hl-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-item .hl-value {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+
+    /* ============================================================
+       FILM
+    ============================================================ */
+    #film {
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border);
+    }
+
+    .film-card {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      padding: 2.5rem;
+      background: var(--bg-lifted);
+      border: 1px solid var(--border-light);
+      max-width: 780px;
+    }
+
+    .film-status {
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+
+    .film-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.15;
+    }
+    .film-title a {
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .film-title a:hover { color: var(--accent-gold); }
+
+    .film-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .film-description {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 60ch;
+    }
+    .film-description a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .film-description a:hover { border-color: var(--accent-gold); }
+
+    .film-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .film-links a {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .film-links a:hover { color: var(--accent-gold); border-color: var(--accent-gold); }
+
+    /* ============================================================
+       MUSIC
+    ============================================================ */
+    #music {
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Featured EP Card ── */
+    .ep-card {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 3.5rem;
+      align-items: start;
+      padding: 2.5rem;
+      background: var(--bg-lifted);
+      border: 1px solid var(--border-light);
+      margin-bottom: 5rem;
+    }
+
+    .ep-artwork {
+      aspect-ratio: 1;
+      background:
+        radial-gradient(ellipse 70% 65% at 42% 38%, rgba(200, 149, 42, 0.22) 0%, transparent 58%),
+        radial-gradient(ellipse 50% 60% at 70% 70%, rgba(110, 40, 32, 0.2) 0%, transparent 50%),
+        linear-gradient(140deg, #1d1008 0%, #361b0a 40%, #200f08 70%, #130804 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ep-artwork-inner {
+      text-align: center;
+      position: relative;
+    }
+
+    .ep-artwork-inner .art-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+
+    .ep-artwork-inner .art-sub {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .ep-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .ep-release-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+
+    .ep-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text-primary);
+    }
+
+    .ep-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .ep-description {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 46ch;
+    }
+
+    /* Mock Spotify embed — styled dark player */
+    .mock-player {
+      background: #111;
+      border-radius: 8px;
+      padding: 1rem 1.2rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .mock-player-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .play-btn {
+      width: 38px; height: 38px;
+      background: #1DB954;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: transform 0.15s, background 0.15s;
+    }
+    .play-btn:hover { transform: scale(1.06); background: #1ed760; }
+    .play-btn svg { width: 14px; height: 14px; fill: #000; margin-left: 2px; }
+
+    .player-track { flex: 1; min-width: 0; }
+    .player-track-name  { font-size: 0.82rem; font-weight: 500; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .player-track-artist { font-size: 0.7rem; color: #aaa; }
+    .player-logo { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.1em; color: #1DB954; flex-shrink: 0; }
+
+    .progress-wrap { display: flex; flex-direction: column; gap: 0.3rem; }
+    .progress-bar {
+      height: 3px; background: #333; border-radius: 2px;
+      position: relative; overflow: hidden;
+    }
+    .progress-fill {
+      position: absolute; left: 0; top: 0; height: 100%;
+      width: 33%; background: #1DB954; border-radius: 2px;
+    }
+    .progress-times {
+      display: flex; justify-content: space-between;
+      font-size: 0.6rem; color: #666;
+    }
+
+    .tracklist { display: flex; flex-direction: column; gap: 2px; }
+
+    .track-row {
+      display: grid;
+      grid-template-columns: 18px 1fr auto;
+      gap: 0.8rem;
+      align-items: center;
+      padding: 0.38rem 0.25rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .track-row:hover { background: rgba(255,255,255,0.06); }
+
+    .track-num  { font-size: 0.62rem; color: #555; text-align: right; }
+    .track-name { font-size: 0.75rem; color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .track-dur  { font-size: 0.62rem; color: #555; }
+
+    .track-row.playing .track-num  { color: #1DB954; }
+    .track-row.playing .track-name { color: #fff; }
+
+    /* Platform links row */
+    .ep-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .ep-links a {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .ep-links a:hover { color: var(--accent-gold); border-color: var(--accent-gold); }
+
+    /* ── Singles grid ── */
+    .singles-label {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .singles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4.5rem;
+    }
+
+    .single-card {
+      background: var(--bg-lifted);
+      border: 1px solid var(--border);
+      padding: 1.4rem;
+      transition: border-color 0.25s;
+    }
+    .single-card:hover { border-color: var(--border-light); }
+
+    .single-artwork {
+      aspect-ratio: 1;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 45%, rgba(200, 149, 42, 0.1) 0%, transparent 55%),
+        linear-gradient(140deg, #181008 0%, #291507 50%, #160d06 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .single-artwork-num {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      font-weight: 300;
+      color: rgba(200, 149, 42, 0.14);
+    }
+
+    .single-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .single-year {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.85rem;
+    }
+
+    .platform-tags {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .platform-tags a {
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 3px 9px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .platform-tags a:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+
+    /* Album teaser */
+    .music-teaser {
+      text-align: center;
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .music-teaser a {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.22s;
+    }
+    .music-teaser a::after { content: ' ›'; color: var(--accent-gold); }
+    .music-teaser a:hover  { color: var(--accent-gold); }
+
+    /* ============================================================
+       LIVE
+    ============================================================ */
+    #live {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .live-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .live-item {
+      background: var(--bg-lifted);
+      padding: 2rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .live-date   { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 0.2rem; }
+    .live-venue  { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--text-primary); line-height: 1.2; }
+    .live-venue a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .live-venue a:hover { color: var(--accent-gold); border-color: var(--accent-gold); }
+    .live-loc    { font-size: 0.8rem; color: var(--text-secondary); }
+
+    .live-tag {
+      display: inline-block;
+      margin-top: 0.6rem;
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: fit-content;
+    }
+
+    .live-booking-note {
+      margin-top: 3rem;
+      padding: 1.4rem 1.8rem;
+      border-left: 2px solid var(--accent-gold);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .live-booking-note a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .live-booking-note a:hover { color: var(--accent-amber); }
+
+    /* ============================================================
+       CONTACT
+    ============================================================ */
+    #contact {
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-paths {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .contact-path .cp-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-path .cp-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .contact-path a {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-path a:hover { color: var(--accent-gold); }
+
+    /* Form */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: var(--bg-lifted);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 300;
+      padding: 0.85rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+      width: 100%;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--text-muted); }
+
+    .form-group input:focus,
+    .form-group textarea:focus  { border-color: var(--accent-gold); }
+
+    .form-group textarea { height: 130px; }
+
+    .btn-submit {
+      align-self: flex-start;
+      background: var(--accent-gold);
+      color: var(--bg-deep);
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.6rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.22s, transform 0.18s;
+    }
+    .btn-submit:hover { background: var(--accent-amber); transform: translateY(-2px); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      padding: 2.2rem 8vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy     { font-size: 0.68rem; color: var(--text-muted); }
+    .footer-location { font-size: 0.68rem; color: var(--text-muted); font-style: italic; letter-spacing: 0.08em; }
+
+    .footer-socials { display: flex; gap: 1.2rem; }
+    .footer-socials a {
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      transition: color 0.2s;
+    }
+    .footer-socials a:hover { color: var(--accent-gold); }
+    .footer-socials svg { width: 15px; height: 15px; fill: currentColor; }
+
+    /* ============================================================
+       RESPONSIVE — TABLET
+    ============================================================ */
+    @media (max-width: 960px) {
+      .about-grid        { grid-template-columns: 1fr; gap: 3rem; }
+      .about-photo       { max-width: 380px; }
+      .highlights        { grid-template-columns: 1fr 1fr; }
+      .ep-card           { grid-template-columns: 1fr; gap: 2rem; }
+      .ep-artwork        { max-width: 200px; }
+      .singles-grid      { grid-template-columns: 1fr 1fr; }
+      .live-grid         { grid-template-columns: 1fr; }
+      .contact-grid      { grid-template-columns: 1fr; gap: 3.5rem; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — MOBILE
+    ============================================================ */
+    @media (max-width: 640px) {
+      section        { padding: 5rem 6vw; }
+      #main-nav      { padding: 1rem 6vw; }
+      .nav-links     { display: none; }
+      .nav-right     { gap: 0; }
+      #hero          { padding: 0 6vw; }
+      .hero-socials  { left: 6vw; }
+      .hero-scroll   { display: none; }
+      .singles-grid  { grid-template-columns: 1fr; }
+      .highlights    { grid-template-columns: 1fr; gap: 1.5rem; }
+      .ep-card       { padding: 1.5rem; }
+      .film-card     { padding: 1.5rem; }
+      .live-item     { padding: 1.5rem 1.75rem; }
+
+      footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================================================================
+       STICKY NAV — revealed on scroll via IntersectionObserver
+  ================================================================ -->
+  <nav id="main-nav" aria-label="Site navigation">
+    <a href="#hero" class="nav-logo" aria-label="VPC home">VPC</a>
+    <div class="nav-right">
+      <ul class="nav-links" role="list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#film">Film</a></li>
+        <li><a href="#music">Music</a></li>
+        <li><a href="#live">Live</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-socials" aria-label="Social links">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/vanessaparishcrooks/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <!-- Spotify -->
+        <a href="https://open.spotify.com/artist/3yDJfYPzQHxXAHL9eqzaGD" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+          </svg>
+        </a>
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@vanessaparishcrooks" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ================================================================
+       HERO
+  ================================================================ -->
+  <section id="hero" aria-label="Hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Singer · Rapper · Poet · Lisbon, Portugal</p>
+
+      <h1 class="hero-name">
+        Vanessa<br>
+        Parish<br>
+        <span class="accent-line">Crooks</span>
+      </h1>
+
+      <p class="hero-tagline">"Soul, roots, and a sharp pen."</p>
+
+      <div class="hero-ctas">
+        <a href="#music" class="btn btn-primary">Listen</a>
+        <a href="epk.html" class="btn btn-ghost">EPK</a>
+      </div>
+    </div>
+
+    <!-- Social icons -->
+    <div class="hero-socials" aria-label="Social links">
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/vanessaparishcrooks/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+      <!-- Spotify -->
+      <a href="https://open.spotify.com/artist/3yDJfYPzQHxXAHL9eqzaGD" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+        </svg>
+      </a>
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@vanessaparishcrooks" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">Scroll</div>
+  </section>
+
+
+  <!-- ================================================================
+       ABOUT
+  ================================================================ -->
+  <section id="about">
+    <p class="section-label">About</p>
+
+    <div class="about-grid">
+      <!-- Left: photo placeholder + pull quote -->
+      <div class="about-photo-wrap">
+        <div class="about-photo" role="img" aria-label="Photo of Vanessa Parish Crooks"></div>
+        <p class="about-photo-caption">Vanessa Parish Crooks — Lisbon, Portugal</p>
+
+        <blockquote class="about-pull-quote">
+          "Words are how I arrived here.<br>Music is how I stayed."
+        </blockquote>
+      </div>
+
+      <!-- Right: bio text -->
+      <div class="about-text">
+        <h2 class="section-title">Word healer.<br>Life enthusiast.</h2>
+
+        <p>Vanessa Parish Crooks is a multi-talented artist — singer, songwriter, poet, rapper, spoken word artist, and actress. Born and raised in Lisbon to Cape Verdean parents from the island of Brava, her artistry lives where neo-soul, R&amp;B, hip-hop, morna, and kizomba converge — where the personal becomes political, the lyrical becomes liturgical, giving voice to the Black Lusophone experience.</p>
+
+        <p>She began writing before she began performing. Spoken word was her entry point — a way of making sense of belonging and diaspora while moving between languages and cultures, and her works move fluidly between English, Portuguese, and Cape Verdean Creole. In 2012 she moved to London, living in the Oxford area, before returning to Lisbon during COVID.</p>
+
+        <p>By 2021, she had taken her voice into music, releasing debut single <a href="https://open.spotify.com/track/3qITa5Qw78gObNtr90Xes9" target="_blank" rel="noopener noreferrer"><em>Gentle Reminder</em></a>. She cites Erykah Badu, Jill Scott, Lauryn Hill, Mayra Andrade, and Sara Tavares as spiritual kin. Her debut EP, <a href="https://open.spotify.com/artist/3yDJfYPzQHxXAHL9eqzaGD" target="_blank" rel="noopener noreferrer"><em>3 Walls &amp; A Call</em></a>, was released in 2023 while she hosted open mics throughout Lisbon. In 2024 she won <a href="https://rappeusesenliberte.com/sheraps/portugal/" target="_blank" rel="noopener noreferrer">She Raps</a>, and in 2025 became a semi-finalist on <a href="https://www.youtube.com/watch?v=agVENytCMRE" target="_blank" rel="noopener noreferrer">Got Talent Portugal</a>. In July 2025 she performed at <a href="https://festapp.io/festivals/les-ardentes-festival/2025" target="_blank" rel="noopener noreferrer">Les Ardentes Festival</a> with She Raps, sharing a bill with David Guetta, Gucci Mane, Mustard, Ty Dolla $ign, J Balvin, and Latto.</p>
+
+        <p>Vanessa is also the co-founder of <a href="https://www.instagram.com/soulsessions.lx/" target="_blank" rel="noopener noreferrer">Soul Sessions LX</a> — a monthly Sunday event in Lisbon combining DJ sets and live performances by local artists celebrating soul icons like Sara Tavares, Erykah Badu, Marvin Gaye, Amy Winehouse, and Sade. She is currently working on releasing <a href="https://www.gofundme.com/f/k6tye-help-me-fund-my-first-album" target="_blank" rel="noopener noreferrer">her first album</a>, and recently wrapped <a href="https://www.imdb.com/name/nm18720289/" target="_blank" rel="noopener noreferrer">her first film credit</a>.</p>
+      </div>
+    </div>
+
+    <!-- Highlights strip -->
+    <div class="highlights" aria-label="Career highlights">
+      <div class="highlight-item">
+        <p class="hl-label">TV Stage</p>
+        <p class="hl-value">Got Talent Portugal — 2025 Semi-Finalist</p>
+      </div>
+      <div class="highlight-item">
+        <p class="hl-label">Festival</p>
+        <p class="hl-value">Les Ardentes Festival, Liège</p>
+      </div>
+      <div class="highlight-item">
+        <p class="hl-label">Debut Release</p>
+        <p class="hl-value"><em>3 Walls &amp; A Call</em> — EP 2023</p>
+      </div>
+      <div class="highlight-item">
+        <p class="hl-label">Reach</p>
+        <p class="hl-value">Performing across Portugal &amp; Europe</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       FILM
+  ================================================================ -->
+  <section id="film" aria-label="Film">
+    <p class="section-label">Film</p>
+    <h2 class="section-title">On Screen</h2>
+
+    <article class="film-card" aria-label="The Man Who Stole Portugal">
+      <p class="film-status">In Post-Production</p>
+      <h3 class="film-title"><a href="https://www.imdb.com/title/tt42455942/" target="_blank" rel="noopener noreferrer">The Man Who Stole Portugal</a></h3>
+      <p class="film-meta">Directed by Thomas Napper · Release: TBD</p>
+      <p class="film-description">Vanessa makes her screen debut with <a href="https://www.imdb.com/name/nm18720289/" target="_blank" rel="noopener noreferrer">screen and soundtrack credits</a> on this upcoming feature.</p>
+      <nav class="film-links" aria-label="Press coverage">
+        <a href="https://www.imdb.com/title/tt42455942/" target="_blank" rel="noopener noreferrer">IMDb</a>
+        <a href="https://variety.com/2026/film/global/james-nelson-joyce-the-man-who-stole-portugal-1236739743/" target="_blank" rel="noopener noreferrer">Variety</a>
+        <a href="https://www.hollywoodreporter.com/movies/movie-news/grant-west-nelson-joyce-man-who-stole-portugal-film-napper-1236587731/" target="_blank" rel="noopener noreferrer">Hollywood Reporter</a>
+      </nav>
+    </article>
+  </section>
+
+
+  <!-- ================================================================
+       MUSIC
+  ================================================================ -->
+  <section id="music">
+    <p class="section-label">Music</p>
+    <h2 class="section-title">Discography</h2>
+
+    <!-- Featured EP -->
+    <article class="ep-card" aria-label="Debut EP: 3 Walls & A Call">
+      <div class="ep-artwork" role="img" aria-label="EP artwork for 3 Walls & A Call">
+        <img src="assets/3-walls-ep-cover.jpeg" alt="3 Walls &amp; A Call — Vanessa Parish Crooks debut EP cover" style="width: 100%; display: block;">
+      </div>
+
+      <div class="ep-info">
+        <p class="ep-release-label">Featured Release</p>
+        <h3 class="ep-title">3 Walls &amp; A Call</h3>
+        <p class="ep-meta">Debut EP · 2023 · 5 Tracks</p>
+
+        <p class="ep-description">A debut that announces itself quietly — then doesn't let go. Five tracks that move between ache and clarity, between Cape Verdean memory and Lisbon pavement, in a voice that knows exactly when to whisper and when to break.</p>
+
+        <!-- Spotify embed -->
+        <iframe
+          src="https://open.spotify.com/embed/album/4srsnDg4RJ9fOWZSW6bhW6"
+          width="100%"
+          height="352"
+          frameborder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          style="border-radius: 12px;">
+        </iframe>
+
+        <nav class="ep-links" aria-label="Stream EP on">
+          <a href="https://open.spotify.com/artist/3yDJfYPzQHxXAHL9eqzaGD" target="_blank" rel="noopener noreferrer">Spotify</a>
+          <a href="https://music.apple.com/pt/artist/vanessa-parish-crooks/1558352318" target="_blank" rel="noopener noreferrer">Apple Music</a>
+          <a href="https://www.pandora.com/artist/vanessa-parish-crooks/ARtqjPfp6JJJVxq" target="_blank" rel="noopener noreferrer">Pandora</a>
+        </nav>
+      </div>
+    </article>
+
+    <!-- Singles -->
+    <p class="singles-label">Singles</p>
+    <div class="singles-grid">
+
+      <article class="single-card">
+        <div class="single-artwork" role="img" aria-label="No Holding artwork">
+          <span class="single-artwork-num" aria-hidden="true">I</span>
+        </div>
+        <h4 class="single-title">No Holding</h4>
+        <p class="single-year">2025</p>
+        <nav class="platform-tags" aria-label="Stream No Holding on">
+          <a href="https://open.spotify.com/artist/3yDJfYPzQHxXAHL9eqzaGD" target="_blank" rel="noopener noreferrer">Spotify</a>
+          <a href="https://music.apple.com/pt/artist/vanessa-parish-crooks/1558352318" target="_blank" rel="noopener noreferrer">Apple Music</a>
+        </nav>
+      </article>
+
+      <article class="single-card">
+        <div class="single-artwork" role="img" aria-label="Fling artwork">
+          <span class="single-artwork-num" aria-hidden="true">II</span>
+        </div>
+        <h4 class="single-title">Fling</h4>
+        <p class="single-year">2023</p>
+        <nav class="platform-tags" aria-label="Stream Fling on">
+          <a href="https://open.spotify.com/artist/3yDJfYPzQHxXAHL9eqzaGD" target="_blank" rel="noopener noreferrer">Spotify</a>
+          <a href="https://music.apple.com/pt/artist/vanessa-parish-crooks/1558352318" target="_blank" rel="noopener noreferrer">Apple Music</a>
+        </nav>
+      </article>
+
+      <article class="single-card">
+        <div class="single-artwork" role="img" aria-label="Gentle Reminder artwork">
+          <span class="single-artwork-num" aria-hidden="true">III</span>
+        </div>
+        <h4 class="single-title">Gentle Reminder</h4>
+        <p class="single-year">2020</p>
+        <nav class="platform-tags" aria-label="Stream Gentle Reminder on">
+          <a href="https://open.spotify.com/track/3qITa5Qw78gObNtr90Xes9" target="_blank" rel="noopener noreferrer">Spotify</a>
+          <a href="https://soundcloud.com/vanessa-parish-crooks" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+        </nav>
+      </article>
+
+    </div>
+
+    <!-- Album teaser -->
+    <div class="music-teaser">
+      <a href="https://www.gofundme.com/f/k6tye-help-me-fund-my-first-album" target="_blank" rel="noopener noreferrer">Help fund the debut album — coming soon.</a>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       LIVE
+  ================================================================ -->
+  <section id="live">
+    <p class="section-label">Live</p>
+    <h2 class="section-title">On Stage</h2>
+
+    <div class="live-grid">
+      <div class="live-item">
+        <p class="live-date">Jul 2026</p>
+        <p class="live-venue"><a href="https://www.agendalx.pt/events/event/duo-festival/" target="_blank" rel="noopener noreferrer">Duo Festival Poesia</a></p>
+        <p class="live-loc">Lisbon, Portugal</p>
+        <span class="live-tag">Festival</span>
+      </div>
+      <div class="live-item">
+        <p class="live-date">Jul 2026</p>
+        <p class="live-venue">Noite de Cabo Verde</p>
+        <p class="live-loc">Fábrica Braço de Prata · Lisbon</p>
+        <span class="live-tag">Performance</span>
+      </div>
+      <div class="live-item">
+        <p class="live-date">Jan 2026</p>
+        <p class="live-venue"><a href="https://www.instagram.com/motherland.fest/" target="_blank" rel="noopener noreferrer">Motherland Fest</a></p>
+        <p class="live-loc">Sem Emenda</p>
+        <span class="live-tag">Performance</span>
+      </div>
+      <div class="live-item">
+        <p class="live-date">Oct 2025</p>
+        <p class="live-venue"><a href="https://www.youtube.com/watch?v=XJnWg9M4_DU" target="_blank" rel="noopener noreferrer">Casa Capitão</a></p>
+        <p class="live-loc">With She Raps</p>
+        <span class="live-tag">Performance</span>
+      </div>
+      <div class="live-item">
+        <p class="live-date">Sept 2025</p>
+        <p class="live-venue"><a href="https://grand8.univ-paris8.fr/-programme-" target="_blank" rel="noopener noreferrer">Grand 8 Festival</a></p>
+        <p class="live-loc">Paris, France — with She Raps</p>
+        <span class="live-tag">Festival</span>
+      </div>
+      <div class="live-item">
+        <p class="live-date">Jul 2025</p>
+        <p class="live-venue"><a href="https://festapp.io/festivals/les-ardentes-festival/2025" target="_blank" rel="noopener noreferrer">Les Ardentes Festival</a></p>
+        <p class="live-loc">Liège, Belgium — with She Raps</p>
+        <span class="live-tag">Festival</span>
+      </div>
+      <div class="live-item">
+        <p class="live-date">2025</p>
+        <p class="live-venue"><a href="https://www.youtube.com/watch?v=agVENytCMRE" target="_blank" rel="noopener noreferrer">Got Talent Portugal</a></p>
+        <p class="live-loc">RTP1 · Lisbon, Portugal</p>
+        <span class="live-tag">Semi-Finalist</span>
+      </div>
+      <div class="live-item">
+        <p class="live-date">May 2025</p>
+        <p class="live-venue"><a href="https://www.visitlisboa.com/en/events/somersby-out-jazz" target="_blank" rel="noopener noreferrer">Somersby's Out Jazz Festival</a></p>
+        <p class="live-loc">Lisbon, Portugal</p>
+        <span class="live-tag">Festival</span>
+      </div>
+      <div class="live-item">
+        <p class="live-date">2025</p>
+        <p class="live-venue"><a href="https://www.theblackcatcinema.com/" target="_blank" rel="noopener noreferrer">Black Cat Cinema</a></p>
+        <p class="live-loc">Lisbon, Portugal</p>
+        <span class="live-tag">Performance</span>
+      </div>
+      <div class="live-item">
+        <p class="live-date">2024</p>
+        <p class="live-venue"><a href="https://rappeusesenliberte.com/sheraps/portugal/" target="_blank" rel="noopener noreferrer">She Raps</a></p>
+        <p class="live-loc">Portugal's First Female Rap Incubator</p>
+        <span class="live-tag">Winner</span>
+      </div>
+      <div class="live-item">
+        <p class="live-date">2023</p>
+        <p class="live-venue">Musicbox Lisboa</p>
+        <p class="live-loc">Hip Hop Sou Eu — Live Sessions</p>
+        <span class="live-tag">Live Set</span>
+      </div>
+      <div class="live-item">
+        <p class="live-date">Sept 2023</p>
+        <p class="live-venue"><a href="https://sonsdalusofonia.com/en/lisboa-mistura-en/" target="_blank" rel="noopener noreferrer">JazzOpa / Lisboa Mistura</a></p>
+        <p class="live-loc">Lisbon, Portugal</p>
+        <span class="live-tag">Featured Act</span>
+      </div>
+      <div class="live-item">
+        <p class="live-date">Ongoing</p>
+        <p class="live-venue"><a href="https://www.instagram.com/soulsessions.lx/" target="_blank" rel="noopener noreferrer">Soul Sessions Lisbon</a></p>
+        <p class="live-loc">@soulsessions.lx · Lisbon</p>
+        <span class="live-tag">Resident</span>
+      </div>
+    </div>
+
+    <p class="live-booking-note">
+      For booking and live enquiries, contact management —
+      <a href="mailto:rondaleeconsulting@gmail.com">Ronda L. Lee</a>
+      (rondaleeconsulting@gmail.com)
+      or use the form below.
+    </p>
+  </section>
+
+
+  <!-- ================================================================
+       CONTACT
+  ================================================================ -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Get in Touch</h2>
+
+    <div class="contact-grid">
+      <!-- Contact paths -->
+      <div class="contact-paths">
+        <div class="contact-path">
+          <p class="cp-label">Management, Booking &amp; Press</p>
+          <p class="cp-name">Ronda L. Lee</p>
+          <a href="mailto:rondaleeconsulting@gmail.com">rondaleeconsulting@gmail.com</a>
+          <a href="https://www.ronda-lee.com/about/" target="_blank" rel="noopener noreferrer">About Ronda →</a>
+        </div>
+        <div class="contact-path">
+          <p class="cp-label">Artist Pack</p>
+          <p class="cp-name">EPK</p>
+          <a href="epk.html">Download EPK →</a>
+        </div>
+      </div>
+
+      <!-- Contact form — no backend, markup only -->
+      <form class="contact-form" novalidate onsubmit="return false;">
+        <div class="form-group">
+          <label for="contact-name">Name</label>
+          <input
+            type="text" id="contact-name" name="name"
+            placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Email</label>
+          <input
+            type="email" id="contact-email" name="email"
+            placeholder="your@email.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="contact-message">Message</label>
+          <textarea
+            id="contact-message" name="message"
+            placeholder="Tell Vanessa what's on your mind…"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       FOOTER
+  ================================================================ -->
+  <footer>
+    <span class="footer-copy">© 2025 Vanessa Parish Crooks. All rights reserved.</span>
+    <span class="footer-location">Based in Lisbon, Portugal</span>
+
+    <nav class="footer-socials" aria-label="Social links">
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/vanessaparishcrooks/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+      <!-- Spotify -->
+      <a href="https://open.spotify.com/artist/3yDJfYPzQHxXAHL9eqzaGD" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+        </svg>
+      </a>
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@vanessaparishcrooks" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/>
+        </svg>
+      </a>
+    </nav>
+  </footer>
+
+
+  <!-- ================================================================
+       JS — sticky nav via IntersectionObserver (no scroll listener)
+  ================================================================ -->
+  <script>
+    (function () {
+      var nav  = document.getElementById('main-nav');
+      var hero = document.getElementById('hero');
+
+      // Show nav when hero is no longer in view (bottom of hero passes viewport top)
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            nav.classList.toggle('visible', !entry.isIntersecting);
+          });
+        },
+        { threshold: 0.12 }
+      );
+
+      observer.observe(hero);
+    })();
+  </script>
+
+</body>
+</html>
