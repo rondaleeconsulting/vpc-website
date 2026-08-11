@@ -771,6 +771,33 @@
       border-top: 1px solid var(--border);
     }
 
+    .live-video {
+      position: relative;
+      width: 100%;
+      max-width: 860px;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .live-video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .live-video-caption {
+      margin-top: 0.9rem;
+      margin-bottom: 3rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
     .live-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1254,6 +1281,17 @@
   <section id="live">
     <p class="section-label">Live</p>
     <h2 class="section-title">On Stage</h2>
+
+    <div class="live-video">
+      <iframe
+        src="https://drive.google.com/file/d/1HaI2FTyRZ6872unV-e1ZVbv8YVBF9R0r/preview"
+        title="Strange Fruit — Vanessa Parish Crooks"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
+    <p class="live-video-caption">Strange Fruit — Live Performance</p>
 
     <div class="live-grid">
       <div class="live-item">
