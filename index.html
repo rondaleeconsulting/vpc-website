@@ -851,6 +851,58 @@
     .live-booking-note a:hover { color: var(--accent-amber); }
 
     /* ============================================================
+       PRESS
+    ============================================================ */
+    #press {
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border);
+    }
+
+    .press-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .press-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .press-item:first-child { border-top: 1px solid var(--border); }
+
+    .press-outlet {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      white-space: nowrap;
+    }
+
+    .press-title a {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .press-title a:hover { color: var(--accent-gold); border-color: var(--accent-gold); }
+
+    .press-tag {
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border: 1px solid var(--border-light);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* ============================================================
        CONTACT
     ============================================================ */
     #contact {
@@ -1012,6 +1064,7 @@
       .ep-card       { padding: 1.5rem; }
       .film-card     { padding: 1.5rem; }
       .live-item     { padding: 1.5rem 1.75rem; }
+      .press-item    { grid-template-columns: 1fr; gap: 0.5rem; }
 
       footer {
         flex-direction: column;
@@ -1035,6 +1088,7 @@
         <li><a href="#film">Film</a></li>
         <li><a href="#music">Music</a></li>
         <li><a href="#live">Live</a></li>
+        <li><a href="#press">Press</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
 
@@ -1398,6 +1452,23 @@
       (rondaleeconsulting@gmail.com)
       or use the form below.
     </p>
+  </section>
+
+
+  <!-- ================================================================
+       PRESS
+  ================================================================ -->
+  <section id="press" aria-label="Press &amp; Media">
+    <p class="section-label">Press</p>
+    <h2 class="section-title">In the Press</h2>
+
+    <div class="press-list">
+      <div class="press-item">
+        <p class="press-outlet">People of Lisbon</p>
+        <h3 class="press-title"><a href="https://www.youtube.com/watch?v=uPX7mRWVwKI" target="_blank" rel="noopener noreferrer">People of Lisbon — Interview</a></h3>
+        <span class="press-tag">Video Interview</span>
+      </div>
+    </div>
   </section>
 
 
