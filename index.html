@@ -22,10 +22,10 @@
     /* Design tokens — drawn from Spotify's extracted palette (#401018 deep burgundy)
        and the warm-dark neo-soul / Afro-Lusophone aesthetic */
     :root {
-      --bg-deep:        #080503;   /* near-black with warm undertone */
-      --bg-surface:     #100b07;   /* section alternation */
-      --bg-lifted:      #1a1209;   /* cards, inset elements */
-      --bg-card:        #201508;   /* card border-layer */
+      --bg-deep:        #1c130c;   /* deep warm espresso, lightened from near-black */
+      --bg-surface:     #241a10;   /* section alternation */
+      --bg-lifted:      #2f2214;   /* cards, inset elements */
+      --bg-card:        #392919;   /* card border-layer */
 
       --accent-gold:    #c8952a;   /* primary accent — warm amber gold */
       --accent-amber:   #e4a830;   /* hover state */
@@ -33,10 +33,10 @@
 
       --text-primary:   #f0e8dc;   /* warm off-white */
       --text-secondary: #9a8878;   /* muted warm grey */
-      --text-muted:     #564a40;   /* very muted */
+      --text-muted:     #6b5c4d;   /* very muted, lightened to stay legible on lighter bg */
 
-      --border:         #221710;   /* subtle warm dark border */
-      --border-light:   #2e1f14;
+      --border:         #3c2c1c;   /* subtle warm dark border */
+      --border-light:   #4c3823;
 
       --font-display:   'Cormorant Garamond', Georgia, serif;
       --font-body:      'Inter', system-ui, -apple-system, sans-serif;
@@ -76,7 +76,7 @@
 
     #main-nav.visible {
       transform: translateY(0);
-      background: rgba(8, 5, 3, 0.93);
+      background: rgba(28, 19, 12, 0.93);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
@@ -147,7 +147,7 @@
         radial-gradient(ellipse 90% 60% at 65% 25%, rgba(110, 40, 32, 0.22) 0%, transparent 65%),
         radial-gradient(ellipse 55% 75% at 15% 75%, rgba(200, 149, 42, 0.07) 0%, transparent 60%),
         radial-gradient(ellipse 40% 50% at 85% 80%, rgba(110, 40, 32, 0.12) 0%, transparent 50%),
-        linear-gradient(170deg, #0e0704 0%, #080503 55%, #0c0805 100%);
+        linear-gradient(170deg, #241a10 0%, #1c130c 55%, #201710 100%);
       z-index: 0;
     }
 
