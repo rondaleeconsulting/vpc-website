@@ -162,10 +162,40 @@
       opacity: 0.4;
     }
 
-    .hero-content {
+    .hero-row {
       position: relative;
       z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 3rem;
+    }
+
+    .hero-content {
       max-width: 860px;
+    }
+
+    .hero-photo {
+      flex-shrink: 0;
+      width: 260px;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      display: block;
+      border: 1px solid var(--border-light);
+    }
+
+    .hero-photo-credit {
+      margin-top: 0.6rem;
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: right;
     }
 
     .hero-eyebrow {
@@ -1059,6 +1089,7 @@
       .nav-links     { display: none; }
       .nav-right     { gap: 0; }
       #hero          { padding: 0 6vw; }
+      .hero-photo    { width: 140px; }
       .hero-socials  { left: 6vw; }
       .hero-scroll   { display: none; }
       .singles-grid  { grid-template-columns: 1fr; }
@@ -1130,20 +1161,27 @@
   <section id="hero" aria-label="Hero">
     <div class="hero-bg" aria-hidden="true"></div>
 
-    <div class="hero-content">
-      <p class="hero-eyebrow">Singer · Rapper · Poet · Lisbon, Portugal</p>
+    <div class="hero-row">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Singer · Rapper · Poet · Lisbon, Portugal</p>
 
-      <h1 class="hero-name">
-        Vanessa<br>
-        Parish<br>
-        <span class="accent-line">Crooks</span>
-      </h1>
+        <h1 class="hero-name">
+          Vanessa<br>
+          Parish<br>
+          <span class="accent-line">Crooks</span>
+        </h1>
 
-      <p class="hero-tagline">"Soul, roots, and a sharp pen."</p>
+        <p class="hero-tagline">"Soul, roots, and a sharp pen."</p>
 
-      <div class="hero-ctas">
-        <a href="#music" class="btn btn-primary">Listen</a>
-        <a href="assets/VPC-EPK-2026.pdf" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">EPK</a>
+        <div class="hero-ctas">
+          <a href="#music" class="btn btn-primary">Listen</a>
+          <a href="assets/VPC-EPK-2026.pdf" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">EPK</a>
+        </div>
+      </div>
+
+      <div class="hero-photo">
+        <img src="assets/vpc-headshot-1a.jpg" alt="Vanessa Parish Crooks">
+        <p class="hero-photo-credit">Photo: srtaswan.photography</p>
       </div>
     </div>
 
