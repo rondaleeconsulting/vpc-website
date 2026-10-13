@@ -346,6 +346,51 @@
     }
 
     /* ============================================================
+       ALBUM COUNTDOWN
+    ============================================================ */
+    #countdown-band {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      padding: 4.5rem 8vw;
+      text-align: center;
+    }
+
+    .countdown-label {
+      font-size: 0.64rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 1.1rem;
+    }
+
+    .countdown-days {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(3.6rem, 12vw, 6.5rem);
+      line-height: 0.88;
+      color: var(--accent-gold);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .countdown-unit {
+      display: block;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-top: 0.6rem;
+    }
+
+    .countdown-date {
+      margin-top: 1.2rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================
        ABOUT
     ============================================================ */
     #about {
@@ -1212,6 +1257,17 @@
 
 
   <!-- ================================================================
+       ALBUM COUNTDOWN
+  ================================================================ -->
+  <section id="countdown-band">
+    <p class="countdown-label">Debut Album Arrives In</p>
+    <p class="countdown-days" id="countdown-days">&mdash;</p>
+    <span class="countdown-unit" id="countdown-unit">days</span>
+    <p class="countdown-date">December 11, 2026</p>
+  </section>
+
+
+  <!-- ================================================================
        ABOUT
   ================================================================ -->
   <section id="about">
@@ -1657,6 +1713,28 @@
       );
 
       observer.observe(hero);
+    })();
+  </script>
+
+  <!-- ================================================================
+       JS — album countdown
+  ================================================================ -->
+  <script>
+    (function () {
+      var target = new Date('2026-12-11T00:00:00');
+      var daysEl = document.getElementById('countdown-days');
+      var unitEl = document.getElementById('countdown-unit');
+
+      var msPerDay = 24 * 60 * 60 * 1000;
+      var daysLeft = Math.ceil((target - new Date()) / msPerDay);
+
+      if (daysLeft > 0) {
+        daysEl.textContent = daysLeft;
+        unitEl.textContent = daysLeft === 1 ? 'day' : 'days';
+      } else {
+        daysEl.textContent = '♫';
+        unitEl.textContent = 'out now';
+      }
     })();
   </script>
 
