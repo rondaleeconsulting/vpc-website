@@ -349,10 +349,31 @@
        ALBUM COUNTDOWN
     ============================================================ */
     #countdown-band {
+      position: relative;
       background: var(--bg-surface);
       border-top: 1px solid var(--border);
-      padding: 4.5rem 8vw;
+      padding: 6rem 8vw;
       text-align: center;
+      overflow: hidden;
+    }
+
+    #countdown-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('assets/efflorescere-cover.jpg') center 28% / cover no-repeat;
+    }
+
+    #countdown-band::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(28,19,12,0.78) 0%, rgba(28,19,12,0.55) 45%, rgba(28,19,12,0.88) 100%);
+    }
+
+    #countdown-band > * {
+      position: relative;
+      z-index: 1;
     }
 
     .countdown-label {
@@ -370,6 +391,7 @@
       line-height: 0.88;
       color: var(--accent-gold);
       font-variant-numeric: tabular-nums;
+      text-shadow: 0 2px 22px rgba(0,0,0,0.55);
     }
 
     .countdown-unit {
